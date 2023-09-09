@@ -25,7 +25,7 @@ void filling(long long int N, int* arr){
     }
 }
 
-int main(int argc, char* argv[]){
+int main(int argc, char *argv[]){
     long long int N = argc;
     //scanf("%lld", &N);
     int* arr = (int*)malloc(sizeof(long long int) * N);
