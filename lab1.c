@@ -17,11 +17,10 @@ void bubblesort(int* arr, int N){
     }
 }
 
-void reading(int N, int* arr){
+void filling(int N, int* arr){
     int num;
     for(int i = 0; i < N; i++){
-        scanf("%d", &num);
-        arr[i] = num;
+        arr[i] = rand() % 500000 + 1000000;
     }
 }
 
@@ -35,7 +34,7 @@ int main(){
     int N;
     scanf("%d", &N);
     int* arr = (int*)malloc(sizeof(int) * N);
-    reading(N, arr);
+    filling(N, arr);
     bubblesort(arr, N);
     print(N, arr);
     return 0;
