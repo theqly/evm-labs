@@ -7,9 +7,9 @@ void swap(int *x, int *y){
     *y = tmp;
 }
 
-void bubblesort(int* arr, int N){
-    for(int i = 0; i < N-1; i++){
-        for(int j = 0; j < N-1-i; j++){
+void bubblesort(int* arr, long long int N){
+    for(long long int i = 0; i < N-1; i++){
+        for(long long int j = 0; j < N-1-i; j++){
             if(arr[j] > arr[j+1]){
                 swap(&arr[j], &arr[j+1]);
         }
@@ -17,25 +17,18 @@ void bubblesort(int* arr, int N){
     }
 }
 
-void filling(int N, int* arr){
+void filling(long long int N, int* arr){
     int num;
-    for(int i = 0; i < N; i++){
+    for(long long int i = 0; i < N; i++){
         arr[i] = rand() % 500000 + 1000000;
     }
 }
 
-void print(int N, int* arr){
-    for(int i = 0; i < N; i++){
-        printf("%d ", arr[i]);
-    }
-}
-
 int main(){
-    int N;
-    scanf("%d", &N);
-    int* arr = (int*)malloc(sizeof(int) * N);
+    long long int N;
+    scanf("%lld", &N);
+    int* arr = (int*)malloc(sizeof(long long int) * N);
     filling(N, arr);
     bubblesort(arr, N);
-    print(N, arr);
     return 0;
 }
