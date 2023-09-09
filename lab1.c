@@ -34,6 +34,6 @@ int main(){
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
     bubblesort(arr, N);
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
-    printf("time is: %lf", end - start);
+    printf("Time taken: %lf sec.\n", end.tv_sec-start.tv_sec + 0.000000001*(end.tv_nsec-start.tv_nsec));
     return 0;
 }
