@@ -25,9 +25,9 @@ void filling(long long int N, int* arr){
     }
 }
 
-int main(int argc, char *argv[]){
-    long long int N = argc;
-    //babba
+int main(){
+    long long int N;
+    scanf("%lld", &N);
     int* arr = (int*)malloc(sizeof(long long int) * N);
     filling(N, arr);
     struct timespec start, end;
