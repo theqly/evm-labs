@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void swap(int *x, int *y){
     int tmp = *x;
@@ -29,6 +30,10 @@ int main(){
     scanf("%lld", &N);
     int* arr = (int*)malloc(sizeof(long long int) * N);
     filling(N, arr);
+    struct timespec start, end;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &start);
     bubblesort(arr, N);
+    clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+    printf("time is: %lf", end - start);
     return 0;
 }
