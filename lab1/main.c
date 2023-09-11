@@ -9,9 +9,7 @@ double monte_carlo(long long int N){
   for(long long int i = 0; i < N; i++){
     x = (double)rand() / RAND_MAX;
     y = (double)rand() / RAND_MAX;
-    if(((x*x + y*y) <= 1)){
-      M += 1;
-    }
+    if(((x*x + y*y) <= 1)) M += 1;
   }
   return (double)(4*M)/(double)N;
 }
