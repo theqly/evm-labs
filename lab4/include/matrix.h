@@ -14,6 +14,7 @@ class matrix{
   void fill(size_t row, size_t column);
 
   matrix& transposition();
+  matrix& inverse();
 
   matrix& operator+(const matrix& other);
   matrix& operator-(const matrix& other);

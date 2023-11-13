@@ -52,6 +52,10 @@ matrix& matrix::transposition() {
   return *this;
 }
 
+matrix& matrix::inverse() {
+
+}
+
 matrix& matrix::operator+(const matrix& other) {
   if(_size != other._size){
     std::cout << "not allowed" << std::endl;
