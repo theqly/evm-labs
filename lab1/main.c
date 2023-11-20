@@ -16,13 +16,13 @@ double monte_carlo(long long int N){
 
 int main(int argc, char* argv[]){
   long long int N;
-  scanf("%lld", &N);
+  N = atoll(argv[1]);
   srand(time(NULL));
   struct timespec start, end;
   clock_gettime(CLOCK_MONOTONIC_RAW, &start);
   double pi = monte_carlo(N);
   clock_gettime(CLOCK_MONOTONIC_RAW, &end);
   printf("Time taken: %lf sec.\n", end.tv_sec-start.tv_sec + 0.000000001*(end.tv_nsec-start.tv_nsec));
-  printf("pi: %lf", pi);
+  printf("pi: %lf\n", pi);
   return 0;
 }
