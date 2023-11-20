@@ -13,7 +13,12 @@ class matrix{
 
     void fill(size_t row, size_t column);
 
+<<<<<<< HEAD
     [[nodiscard]] matrix transpose() const;
+=======
+  matrix& transposition();
+  matrix& inverse();
+>>>>>>> 9f76e9cf1a9028a1f70d6c54b455c0683dffe95a
 
     matrix& operator+=(const matrix& other);
     matrix& operator-=(const matrix& other);

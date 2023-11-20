@@ -55,7 +55,15 @@ matrix matrix::transpose() const{
   return transpose;
 }
 
+<<<<<<< HEAD
 matrix& matrix::operator+=(const matrix& other) {
+=======
+matrix& matrix::inverse() {
+
+}
+
+matrix& matrix::operator+(const matrix& other) {
+>>>>>>> 9f76e9cf1a9028a1f70d6c54b455c0683dffe95a
   if(_size != other._size){
     std::cout << "not allowed" << std::endl;
   }
