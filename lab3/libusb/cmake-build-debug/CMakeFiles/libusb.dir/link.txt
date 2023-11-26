@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/libusb.dir/src/main.cpp.o -o libusb  -lusb-1.0 
