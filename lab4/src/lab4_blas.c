@@ -94,31 +94,7 @@ void print(const float* matrix) {
 	printf("\n");
 }
 
-/*void inverse(const size_t M, float* matrix, float* res){
-	float* B = init();
-	float* R = init();
-	float* I = init_single();
-	float* transposed = init();
-	transpose(matrix, transposed);
-	scalar_mul(transposed, 1.0f / (max_collumn(matrix) * max_row(matrix)), B);
-	mul(B, matrix, R);
-	minus(I, R, R);
-	const size_t size = N * N * sizeof(float);
-	memcpy(matrix, R, size);
-	for (size_t i = 0; i < M; ++i) {
-		plus(res, matrix, res);
-		memset(I, 0, size);
-		mul(matrix,R, I);
-		memcpy(matrix, I, size);
-	}
-	mul(res, B, res);
-	free(B);
-	free(R);
-	free(transposed);
-	free(I);
-}*/
-
-void blas_inverse(const size_t M, float* A, float* res){
+void inverse(const size_t M, float* A, float* res){
 	float* B = init();
 	float* R = init();
 
@@ -155,7 +131,7 @@ int main() {
 	float* A = init_single();
 	float* res = init_single();
 	const size_t start = clock();
-	blas_inverse(10, A, res);
+	inverse(10, A, res);
 	printf("was taken %f seconds", (float)(clock() - start) / CLOCKS_PER_SEC);
 	free(A);
 	free(res);

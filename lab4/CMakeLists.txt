@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5.1)
 project(lab4 C)
-set(SRC src/lab4_default.c)
+set(SRC src/lab4_vectorized.c)
 
 find_package(BLAS REQUIRED)
 
