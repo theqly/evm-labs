@@ -53,16 +53,17 @@ void minus(const float *matrix1, const float *matrix2, float *res) {
 }
 
 void mul(const float* matrix1, const float* matrix2, float* res){
+  memset(res, 0, N * N * sizeof(float));
   for (int i = 0; i < N; ++i){
-	for (int j = 0; j < N; j += 4){
+	for (int j = 0; j < N; ++j){
 	  const size_t index = i*N +j;
-	  __m128 sum = _mm_setzero_ps();
-	  __m128 x = _mm_loadu_ps(&matrix1[index]);
-	  for (int k = 0; k < N; ++k){
-		__m128 y = _mm_loadu_ps(&matrix2[i*N + k]);
+	  __m128 x = _mm_set1_ps(matrix1[index]);
+	  for (int k = 0; k < N; k += 4){
+		__m128 result = _mm_loadu_ps(&res[i*N + k]);
+		__m128 y = _mm_loadu_ps(&matrix2[j*N + k]);
 		__m128 product = _mm_mul_ps(x, y);
-		sum = _mm_add_ps(sum, product);
-		_mm_storeu_ps(&res[i*N + k], sum);
+		result = _mm_add_ps(result, product);
+		_mm_storeu_ps(&res[i*N + k], result);
 	  }
 	}
   }
@@ -99,31 +100,14 @@ float max_collumn(const float *matrix) {
   return max;
 }
 
-void print(const float *matrix) {
-  for (size_t i = 0; i < N; ++i){
-	for (size_t j = 0; j < N; ++j){
-	  printf("%f ", matrix[i*N + j]);
-	}
-	printf("\n");
-  }
-  printf("\n");
-}
-
 void inverse(const size_t M, float *A, float *res) {
   float *B = init();
   float *R = init();
-
   float *I = init_single();
-  //I done
-
   transpose(A, B);
   scalar_mul(B, 1.0f/(max_collumn(A)*max_row(A)), B);
-  //B done
-
   mul(B, A, R);
   minus(I, R, R);
-  //R done
-
   const size_t size = N*N*sizeof(float);
   float *tmp = init_single();
   for (size_t i = 0; i < M; ++i){
@@ -136,7 +120,6 @@ void inverse(const size_t M, float *A, float *res) {
   mul(res, B, A);
   memcpy(res, A, size);
   free(tmp);
-
   free(B);
   free(R);
   free(I);

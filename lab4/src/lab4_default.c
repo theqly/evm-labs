@@ -44,6 +44,7 @@ void minus(const float* matrix1, const float* matrix2, float* res) {
 }
 
 void mul(const float* matrix1, const float* matrix2, float* res) {
+  memset(res, 0, N * N * sizeof(float));
   for(size_t i = 0; i < N; ++i){
     for(size_t j = 0; j < N; ++j){
       const size_t index = i*N +j;
@@ -82,32 +83,14 @@ float max_collumn(const float* matrix) {
   return max;
 }
 
-
-void print(const float* matrix) {
-  for(size_t i = 0; i < N; ++i){
-    for(size_t j = 0; j < N; ++j){
-      printf("%f ", matrix[i*N + j]);
-    }
-    printf("\n");
-  }
-  printf("\n");
-}
-
 void inverse(const size_t M, float* A, float* res){
   float* B = init();
   float* R = init();
-
   float* I = init_single();
-  //I done
-
   transpose(A, B);
   scalar_mul(B, 1.0f / (max_collumn(A) * max_row(A)), B);
-  //B done
-
   mul(B, A, R);
   minus(I, R, R);
-  //R done
-
   const size_t size = N * N * sizeof(float);
   float* tmp = init_single();
   for (size_t i = 0; i < M; ++i) {
@@ -120,7 +103,6 @@ void inverse(const size_t M, float* A, float* res){
   mul(res, B, A);
   memcpy(res, A, size);
   free(tmp);
-
   free(B);
   free(R);
   free(I);
