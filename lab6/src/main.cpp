@@ -62,10 +62,10 @@ int main(){
   matrix_mul();
 
   uint64_t offset = 16 * 1024 * 1024 / sizeof(uint32_t);
-  uint64_t size = 16 * 1024 * 1024 / sizeof(uint32_t);
+  uint64_t size = (32*1024 + 512*1024 + 8*1024*1024) / sizeof(uint32_t);
 
   for(uint32_t fragments = 1; fragments < 33; ++fragments){
-	auto* array = new uint32_t[size * 32];
+	auto* array = new uint32_t[offset * 32];
 	sort(array, size, fragments, offset);
 	std::cout << fragments << " " <<get_traversal_time(array, size) << std::endl;
 	delete[] array;
