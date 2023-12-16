@@ -54,14 +54,14 @@ void inverse(const size_t M, float* A, float* res){
 	float* I_ = init_single();
 	transpose(A, B);
 	cblas_sscal(N * N, 1.0f / (max_collumn(A) * max_row(A)), B, 1);
-	cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, N, N, N, 1.0f, B, N, A, N, -1.0f, R, N);
+	cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, N, N, N, -1.0f, B, N, A, N, 0, R, N);
 	cblas_saxpy(N * N, 1.0f, I_, 1, R, 1);
 	const size_t size = N * N * sizeof(float);
 	float* tmp = init_single();
 	for (size_t i = 0; i < M; i++) {
 		cblas_saxpy(N * N, 1.0f, tmp, 1, res, 1);
 		memset(A , 0 , size);
-		cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, N, N, N, 1.0f, tmp, N, R, N, 1.0f, A, N);
+		cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, N, N, N, 1.0f, tmp, N, R, N, 0, A, N);
 		memcpy(tmp, A, size);
 	}
 	memset(A, 0, size);
