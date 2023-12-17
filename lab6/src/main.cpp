@@ -16,15 +16,17 @@ void array_traversal(const uint32_t* array, uint64_t size, uint32_t times){
 }
 
 void sort(uint32_t* array, uint64_t size, uint32_t num_of_fragments, uint32_t offset){
-  for(uint64_t i = 0; i < num_of_fragments; ++i){
-	for(uint64_t j = 0; j < size / num_of_fragments; ++j){
-	  array[offset * i + j] = (i + 1) * offset + j;
-	}
-  }
-  for(uint64_t i = 0; i < size / num_of_fragments; ++i){
-	array[offset * (num_of_fragments - 1) + i] = i + 1;
-  }
 
+  uint32_t i = 0;
+  uint32_t j = 1;
+
+  for(i = 0; i < size / num_of_fragments; ++i){
+	for(j = 1; j < num_of_fragments; ++j){
+	  array[(j-1)*offset + i] = j * offset + i;
+	}
+	array[(j-1)*offset + i] = i + 1;
+  }
+  array[i - 1 + (j - 1) * offset] = 0;
 }
 
 uint64_t get_traversal_time(uint32_t* array, uint64_t size){
@@ -61,7 +63,7 @@ int main(){
 
   matrix_mul();
 
-  uint64_t offset = 16 * 1024 * 1024 / sizeof(uint32_t);
+  uint64_t offset = (16*1024*1024) / sizeof(uint32_t);
   uint64_t size = (32*1024 + 512*1024 + 8*1024*1024) / sizeof(uint32_t);
 
   for(uint32_t fragments = 1; fragments < 33; ++fragments){
